@@ -84,4 +84,4 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Push Package to Nuget
-      run: dotnet nuget push --api-key ${{secrets.NUGET_KEY}} --source "https://api.nuget.org/v3/index.json" *.nupkg
+      run: dotnet nuget push --api-key ${{secrets.NUGET_TOKEN}} --source "https://api.nuget.org/v3/index.json" *.nupkg
