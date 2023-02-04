@@ -36,11 +36,11 @@ jobs:
     - uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '7.0.x'
-        source-url: https://nuget.pkg.github.com/dzitkowskik/index.json
+        source-url: https://api.nuget.org/v3/index.json
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     - run: dotnet build
     - name: Create the package
       run: dotnet pack --configuration Release
     - name: Publish the package to GPR
-      run: dotnet nuget push bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN
