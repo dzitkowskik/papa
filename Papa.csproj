@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Papa</PackageId>
+    <PackageDescription>Simple dotnet tool (CLI) for performing queries to OpenAI API (ChatGPT)</PackageDescription>
+    <Authors>Karol Dzitkowski</Authors>
+    <RepositoryUrl>https://github.com/dzitkowskik/papa</RepositoryUrl>
     <PackAsTool>true</PackAsTool>
     <OutputType>Exe</OutputType>
     <OutputName>papa</OutputName>
