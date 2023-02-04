@@ -22,6 +22,7 @@ jobs:
       with:
         dotnet-version: 7.0.x
         source-url: https://api.nuget.org/v3/index.json
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -31,4 +32,4 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release
     - name: Publish the package to GPR
-      run: dotnet nuget push bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN
+      run: dotnet nuget push bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN --skip-duplicate
