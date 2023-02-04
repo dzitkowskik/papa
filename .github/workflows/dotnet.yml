@@ -29,10 +29,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Create the package
-      run: dotnet pack --configuration Release
-    - name: Publish the package to GPR
-      run: dotnet nuget push bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN --skip-duplicate
 
   semantic-release:
     needs: build
@@ -79,3 +75,18 @@ jobs:
     - name: Push Package to GitHub
       run: dotnet nuget push --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/dzitkowskik/index.json" *.nupkg
 
+  nuget-publish:
+    needs: semantic-release
+    name: Publish to Nuget
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download built project  
+      uses: actions/download-artifact@v3
+      with:
+        name: PackedLib
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Push Package to Nuget
+      run: dotnet nuget push --api-key ${{secrets.NUGET_KEY}} --source "https://api.nuget.org/v3/index.json" *.nupkg
