@@ -11,18 +11,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-        source-url: https://api.nuget.org/v3/index.json
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
